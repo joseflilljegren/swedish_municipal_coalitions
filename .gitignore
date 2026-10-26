@@ -1,0 +1,41 @@
+# Data and other large files
+data
+cache
+logs
+# Exceptions for aggregate data pushed to public
+
+# Secrets and credentials
+.env
+*.env
+
+# Large files and graphs
+*.png
+*.pdf
+*.zip
+*.xlsx
+*.ods
+*.jpg
+*.jpeg
+*.csv
+*.dta
+*.json
+# Specific excludes
+
+# Python stuff
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+.DS_Store
+*.exe
+
+# Generated model artifacts and predictions
+*.pkl
+output/
+
+# Dev
+.vscode
+.claude
+CLAUDE.md

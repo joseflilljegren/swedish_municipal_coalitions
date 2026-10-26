@@ -7,10 +7,17 @@
 """
 
 import conf
+from src import downloader
+from src.logs import log
+import tqdm
+
+
 
 def main():
     """Main."""
-    pass
+    log.info('Downloading raw data…')
+    downloader.get_skr_data()
+    downloader.get_election_data()
 
 
 
