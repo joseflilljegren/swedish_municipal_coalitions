@@ -12,13 +12,11 @@ from src.logs import log
 import tqdm
 
 
-
 def main():
     """Main."""
     log.info('Downloading raw data…')
-    downloader.get_skr_data()
-    downloader.get_election_data()
-
+    downloader.download('municipal_coalitions', 'xlsx')
+    downloader.download('election_results', 'json')
 
 
 if __name__ == "__main__":
