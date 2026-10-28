@@ -47,28 +47,28 @@ def clean_scb_data():
     # Same column names and order as `municipal_coalitions.csv` (FP is SCB's code for L)
     df = df.rename(columns={
         'Region': 'mun_code',
-        'M': 'party_m',
-        'C': 'party_c',
-        'FP': 'party_l',
-        'KD': 'party_kd',
-        'S': 'party_s',
-        'V': 'party_v',
-        'MP': 'party_mp',
-        'SD': 'party_sd',
-        'ÖVRIGA': 'party_misc',
+        'M': 'seats_m',
+        'C': 'seats_c',
+        'FP': 'seats_l',
+        'KD': 'seats_kd',
+        'S': 'seats_s',
+        'V': 'seats_v',
+        'MP': 'seats_mp',
+        'SD': 'seats_sd',
+        'ÖVRIGA': 'seats_misc',
     })
 
     # Bring back the labels from the dimension where they were left behind
     df.insert(1, 'mun_label', df['mun_code'].map(raw['dimension']['Region']['category']['label']))
     # Re-order
-    df = df[['mun_code','mun_label', 'party_m', 'party_c', 'party_l', 'party_kd', 'party_s', 'party_v', 'party_mp', 'party_sd', 'party_misc']]
+    df = df[['mun_code','mun_label', 'seats_m', 'seats_c', 'seats_l', 'seats_kd', 'seats_s', 'seats_v', 'seats_mp', 'seats_sd', 'seats_misc']]
 
 
     # Format the stuff that we have
     df['mun_code'] = df['mun_code'].astype(int)
 
     # How many seats are there in each municipal pairlament
-    df['seats_total'] = df.loc[:, 'party_m':'party_misc'].sum(axis=1)
+    df['seats_total'] = df.loc[:, 'seats_m':'seats_misc'].sum(axis=1)
 
     # Raw database contains this wierd empty municipalitty
     anomalies = df.loc[df['seats_total'].eq(0), ]

@@ -26,5 +26,7 @@ In order to run the entire workflow on your machine:
 # Establish the same conda environment (and make sure that your R-environment has the appropriate packages)
 conda activate swe_elect
 # Run the sequential steps
-python 01_pull_data.py # Pull raw data from the web
+python 01_pull_data.py    # Pull raw data from the web
+python 02_wrangle.py      # Pull raw data from the web
+R 03_run.R                # Run the entire analysis in R
 ```
