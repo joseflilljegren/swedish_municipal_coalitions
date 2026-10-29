@@ -19,18 +19,24 @@ library(ggplot2)
 library(tidyr)
 library(igraph)
 
-# These paths:
+# Setup: Paths
 DATA_SCB <- paste('data', 'cleaned', 'election_results.csv', sep="/")
 DATA_SKR <- paste('data', 'cleaned', 'municipal_coalitions.csv', sep="/")
 
-# Universal function toolbox
+# Setup: Data labels
+source('rsrc/labels.R')
+
+# Setup: Tools
 source('rsrc/tools.R')
 
 
 
-#####################################################################################
 # Data loaders
-
 source('rsrc/load.R')
+source('rsrc/build_network.R')
+
+
+
+
 
 
