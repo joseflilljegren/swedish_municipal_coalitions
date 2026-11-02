@@ -17,6 +17,7 @@ setwd(dirname(normalizePath(script_path)))
 # These libraries
 library(ggplot2)
 library(tidyr)
+library(dplyr)
 library(igraph)
 
 # Setup: Paths

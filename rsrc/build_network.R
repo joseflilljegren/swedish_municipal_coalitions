@@ -11,7 +11,8 @@ get_adjm <- function(ldf, rel=F){
     # Push x onto y to build adjacency matrix
     r <- matrix(rep(unlist(ldf[1,]), ncol(ldf)), nrow=ncol(ldf), byrow=T)
     r[ which(r[1,] != 1), ] <- c(rep(0,ncol(r)))
-    colnames(r) <- rownames(r) <- party_abrevs
+    # Columns come in data order; name them so, reorder later
+    colnames(r) <- rownames(r) <- data_abrevs
     
     # Make relative the coalition size
     if(rel == T){r <- r / n_coalition_parties}
@@ -35,6 +36,10 @@ get_adjm <- function(ldf, rel=F){
 am_abs <- Reduce("+", lapply(1:nrow(df), function(x) get_adjm(df[x,])))
 am <- Reduce("+", lapply(1:nrow(df), function(x) get_adjm(df[x,], rel=T)))
 
+# Reorder from data order to plotting order (left to right)
+am_abs <- am_abs[party_abrevs, party_abrevs]
+am <- am[party_abrevs, party_abrevs]
+
 
 # 
 rule <- data.frame(party = party_names,
@@ -45,9 +50,10 @@ rule <- data.frame(party = party_names,
 )
 # Bring in election results.
 # National overall election result for each party
-rule$nat_elect <- sapply(rule$party, function(x) res2022[which(party_names == x)])
+rule$nat_elect <- setNames(res2022, data_abrevs)[rule$party_abrev]
 # Sum of municipal mandate seats scored in 2022
-rule$mun_seats <- df %>% summarise(across(seats_m:seats_misc, ~ sum(.x, na.rm = TRUE))) %>% t()
+mun_seats <- df %>% summarise(across(seats_m:seats_misc, ~ sum(.x, na.rm = TRUE))) %>% unlist()
+rule$mun_seats <- setNames(mun_seats, data_abrevs)[rule$party_abrev]
 rule$mun_elect <- rule$mun_seats / sum(rule$mun_seats)
 
 # Make contrafactual calculations:
@@ -78,4 +84,7 @@ plot(g,
      edge.width=E(g)$size,
      layout = layout)
 
-plot(g)
+
+# Export plottable data
+write.csv2(am, file='data/plottable/am.csv')
+write.csv2(rule, file='data/plottable/rule.csv')
