@@ -2,7 +2,11 @@
 data
 cache
 logs
+illustrations
 # Exceptions for aggregate data pushed to public
+
+# Specific research-files to keep non-public
+04_explore.R
 
 # Secrets and credentials
 .env
