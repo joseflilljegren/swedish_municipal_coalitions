@@ -15,6 +15,9 @@ Based on methods and visualisation schemas from a similar project based on 2018-
 Data manipulation in Python and analysis in R. This project runs in a conda environment `swe_elect` in python and uses the following R-packages:
  - `ggplot2`
  - `tidyr`
+ - `igraph`
+ - `dplyr`
+ - `stringr`
 
 ## Workflow:
 
@@ -28,5 +31,7 @@ conda activate swe_elect
 # Run the sequential steps
 python 01_pull_data.py    # Pull raw data from the web
 python 02_wrangle.py      # Pull raw data from the web
-R 03_run.R                # Run the entire analysis in R
+Rscript 03_run.R          # Run the entire analysis in R (nicer in RStudio)
 ```
+
+Manual visualisations can be drawn from data processed by this codebase.
